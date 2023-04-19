@@ -1,28 +1,37 @@
-# hello
+# Project Description
 
-This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
+# Background
+This project is derived from another pure voice-based chatbot project without display, so there may be some redundancy in the code during the porting process. Of course, after I have a deeper understanding of the MagicMirror framework, I will improve it.
 
-Todo: Insert description here!
+The project mainly uses snowboy hotword detection to trigger the recording control, and uses Google/text2speech and Google/speech2text to convert between text and speech. Finally, the default module of MagicMirror, compliments, is used to output text and play sound through the hardware.
 
-## Using the module
+The hardware microphone used is the ReSpeaker 2-Mics Pi HAT. For specific usage, please refer to the official documentation: https://wiki.seeedstudio.com/ReSpeaker_2_Mics_Pi_HAT_Raspberry/#driver-installation-and-configuration
 
-To use this module, add the following configuration block to the modules array in the `config/config.js` file:
-```js
-var config = {
-    modules: [
-        {
-            module: 'hello',
-            config: {
-                // See below for configurable options
-            }
-        }
-    ]
-}
-```
+This project consists of four basic modules that are essential for its operation. If you need to install it, you need to install the four projects MMM-LC-Main, MMM-LC-LPCM, MMM-LC-HotWord, and MMM-LC-Text2Speech in the modules directory of MagicMirror.
 
-## Configuration options
+LC is our AI assistant, whose full name is Little Carrie.
 
-| Option           | Description
+# Module Description
+| modules          | Description
 |----------------- |-----------
-| `option1`        | *Required* DESCRIPTION HERE
-| `option2`        | *Optional* DESCRIPTION HERE TOO <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute)
+| `MMM-LC-Main`        | control module, process control
+| `MMM-LC-LPCM`        | Recording module
+| `MMM-LC-HotWord`     | Wake-up word detection module
+| `MMM-LC-Text2Speech` | Text-to-speech module
+
+# MMM-LC-HotWord
+MMM-LC-HotWord module uses snowboy as the wake-up word tool. Snowboy is a customizable hotword detection engine that runs on-device and enables voice wake-up with minimal latency and high accuracy.
+
+The module utilizes the pre-trained snowboy models or allows users to create and train their own custom models using snowboy's online training tools.
+
+I use bugsounet version ,for more information ,please check :https://github.com/bugsounet/snowboy
+for more information about snowboy,please check: https://github.com/Kitt-AI/snowboy
+
+# install some dependents(you might be need to install these first)
+sudo apt-get update
+sudo apt-get install build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libncurses-dev libmagic-dev libatlas-base-dev sox libsox-fmt-all -y
+
+# Installation
+`cd modules` -> `git clone https://github.com/rnbinfo/MMM-LC-HotWord.git`
+
+
