@@ -33,6 +33,22 @@ for more information about snowboy,please check: https://github.com/Kitt-AI/snow
 sudo apt-get update
 sudo apt-get install build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev libncurses-dev libmagic-dev libatlas-base-dev sox libsox-fmt-all -y
 
+
+# MagicMirror might occur some problems when you doing npm install  
+When installing native Node modules on MagicMirror, you may encounter errors due to the fact that MagicMirror uses the Electron framework.
+```
+npm install --save-dev @electron/rebuild
+
+# Every time you run "npm install", run this:
+./node_modules/.bin/electron-rebuild
+
+# If you have trouble on Windows, try:
+.\node_modules\.bin\electron-rebuild.cmd
+```
+for information, please check : https://www.electronjs.org/docs/latest/tutorial/using-native-node-modules/
+
+
+
 # Installation
 `cd modules` -> `git clone https://github.com/rnbinfo/MMM-LC-HotWord.git`
 
