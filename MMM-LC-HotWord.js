@@ -1,3 +1,11 @@
+/* global Module */
+
+/* Magic Mirror
+ * Module: hello
+ *
+ * By pudfi
+ * MIT Licensed.
+ */
 
 Module.register("MMM-LC-HotWord", {
 	defaults: {
@@ -51,6 +59,20 @@ Module.register("MMM-LC-HotWord", {
 	},
 
 	getDom: function() {
+		var self = this;
+
+		// create element wrapper for show into the module
+		var wrapper = document.createElement("div");
+
+		// Data from helper
+		if (this.dataNotification) {
+			var wrapperDataNotification = document.createElement("div");
+			// translations  + datanotification
+			wrapperDataNotification.innerHTML =  this.dataNotification;
+
+			wrapper.appendChild(wrapperDataNotification);
+		}
+		return wrapper;
 	},
 
 	getScripts: function() {
@@ -73,7 +95,9 @@ Module.register("MMM-LC-HotWord", {
 	// socketNotificationReceived from helper
 	socketNotificationReceived: function (notification, payload) {
 		if(notification === "hotword-deteced") {
-
+			// set dataNotification
+			this.dataNotification = "hotword-deteced";
+			this.updateDom();
 			this.sendNotification("start-record");
 		}
 
@@ -82,7 +106,8 @@ Module.register("MMM-LC-HotWord", {
 	// Override notification handler.
 	notificationReceived: function (notification, payload, sender) {
 		if( notification === "init-hotword") {
-
+			this.dataNotification = "init-hotword";
+			this.updateDom();
 			this.sendSocketNotification("init-hotword", null);
 		}
 
